@@ -1,0 +1,35 @@
+
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="bower_components/js-md5/js/md5.min.js"></script>
+    <script src="assets/utils.js"></script>
+    <script>
+    $(document).ready(function(){
+      $(':file').change(function(){
+            var file = this.files[0];
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                var rawData = reader.result;
+                upload('huangchaosuper','huangchaosuper','http://v0.api.upyun.com/huangchaosuper-files/' + file.name,rawData);
+            }
+            reader.readAsBinaryString(file);
+        });
+    });
+    function upload(username,password,path,data){
+        var authorization = 'Basic ' + base64encode(username+':'+password);
+        var xhr = new XMLHttpRequest();
+        xhr.open('PUT', path, true);
+        xhr.setRequestHeader("Origin","*");
+        xhr.setRequestHeader("Authorization",authorization);
+        xhr.send(data);
+    }
+    </script>
+    <title>upload test</title>
+</head>
+<body>
+    <form id="uploadForm" name="uploadForm" enctype="multipart/form-data">
+        <input id="uploadfile" type="file" name="file">
+    </form>
+</body>

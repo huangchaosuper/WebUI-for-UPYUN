@@ -1,0 +1,28 @@
+<div class="container">
+	<div class="col-md-12 column">
+		<div class="row clearfix">
+			<div class="col-md-12 column">
+				<div class="row clearfix">
+					<div class="col-md-4 column"></div>
+					<div class="col-md-4 column">
+						<div class="row clearfix">
+							<form class="form-signin" role="form" ng-show="!active">
+								<h2 class="form-signin-heading">Sign in</h2><br/>
+								<input type="bucketName" class="form-control" placeholder="Bucket" required autofocus ng-model="bucketName"/><br/>
+								<input type="userName" class="form-control" placeholder="User" required autofocus ng-model="userName"/><br/>
+								<input type="password" class="form-control" placeholder="Password" required ng-model="password"/><br/>
+								<button class="btn btn-lg btn-primary btn-block" type="submit" ng-click="login()">Sign in</button>
+							</form>
+							<alert type="danger" ng-show="alertMessage!=null">{{alertMessage}}</alert>
+							<form class="form-signin" role="form" ng-show="active">
+								<h2 class="form-signin-heading">{{bucketName}}->{{userName}}</h2><br/>
+								<button class="btn btn-lg btn-primary btn-block" type="submit" ng-click="logoff()">Sign off</button>
+							</form>
+						</div>
+					</div>
+					<div class="col-md-4 column"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

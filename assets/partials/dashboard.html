@@ -1,0 +1,65 @@
+<div class="container">
+	<div class="col-md-12 column">
+		<br/>
+		<form id="uploadForm" name="uploadForm" enctype="multipart/form-data" style="display: none;">
+			<input id="uploadfile" type="file" name="file">
+		</form>
+		<nav class="navbar navbar-default" role="navigation">
+			<div class="container-fluid">
+				<!-- Brand and toggle get grouped for better mobile display -->
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" ng-click="isCollapsed = !isCollapsed">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="#">Dashboard</a>
+				</div>
+				<nav class="visible-xs" collapse="!isCollapsed">
+					<ul class="nav navbar-nav">
+						<li><a onclick="$('input[id=uploadfile]').click();"><span class='glyphicon glyphicon-cloud-upload'></span> Upload File</a></li> 
+						<li><a ng-click='createFolder()'><span class='glyphicon glyphicon-folder-open'></span> Create Folder</a></li>
+						<li><a ng-click='refresh()'><span class='glyphicon glyphicon-refresh'></span> Refresh</a></li>
+					</ul>
+				</nav>
+				<nav class="hidden-xs">
+					<ul class="nav navbar-nav">
+						<li><a onclick="$('input[id=uploadfile]').click();"><span class='glyphicon glyphicon-cloud-upload'></span> Upload File</a></li> 
+						<li><a ng-click='createFolder()'><span class='glyphicon glyphicon-folder-open'></span> Create Folder</a></li>
+						<li><a ng-click='refresh()'><span class='glyphicon glyphicon-refresh'></span> Refresh</a></li>
+					</ul>
+					<form class="navbar-form navbar-right" role="search">
+						<div class="form-group">
+							<input type="text" class="form-control" placeholder="Path..." ng-model='cloudPath'>
+						</div>
+						<button type="submit" class="btn btn-default" ng-click='search(cloudPath)'>Search</button>
+					</form>
+				</nav>
+			</div><!-- /.container-fluid -->
+		</nav>
+		<div class="col-md-12 column well bs-example">
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>Name.</th>
+						<th class="hidden-xs">Size.</th>
+						<th class="hidden-xs">Date modified.</th>
+						<th>#></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="directory in directorys">
+						<td><a class='pointer' ng-click='select(directory)'><span class="glyphicon {{directory.type=='N'?'glyphicon-file':'glyphicon-folder-open'}}"></span> {{directory.name}}</a></td>
+						<td class="hidden-xs">{{directory.type=='F'?'':((directory.size/1024|number:2) + ' KB')}}</td>
+						<td class="hidden-xs">{{directory.date * 1000 | date : 'fullDate'}}</td>
+						<td><a class='pointer' ng-click='delete($index,directory.name,directory.type)'><span class="label label-default">X</span></a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="col-md-12 column well bs-example">
+			<span>usage: {{usage/1024/1024|number:2}} MB</span>
+		</div>
+	</div>
+</div>
